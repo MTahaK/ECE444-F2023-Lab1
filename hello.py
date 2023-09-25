@@ -26,7 +26,7 @@ def index():
 
         if old_name is not None and old_name != form.name.data:
             flash('Looks like you have changed your name!')
-        
+        session['name'] = form.name.data
         
         if old_email is not None and old_email != form.email.data:
             flash('Looks like you have changed your email!')
@@ -36,7 +36,7 @@ def index():
         else:
             session.pop('email_warning', None)
         
-        session['name'] = form.name.data
+        
         session['email'] = form.email.data
         return redirect(url_for('index'))
     return render_template('index.html', form = form, name = session.get('name'), email=session.get('email'), email_warning=session.get('email_warning'))
